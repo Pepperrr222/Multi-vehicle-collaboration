@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="pit_model">
+    <static>true</static>  <!-- 设置为true，表示它是一个静态物体，不会移动 -->
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+ 		 <cylinder>
+   		 <radius>0.4</radius> <!-- 圆柱体的半径 -->
+    		 <length>0.0001</length>  <!-- 圆柱体的高度 (也就是坑的深度) -->
+ 		 </cylinder>
+	</geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.4 0.4 0.001</size>
+          </box>
+        </geometry>
+        <!-- (可选) 设置坑洞的颜色，比如深灰色，让它看起来更像坑 -->
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/DarkGrey</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

@@ -1,0 +1,17 @@
+# ROS Catkin-specific
+build/
+devel/
+install/
+logs/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*~
+*.pyc
+__pycache__/
+
+# Other common files to ignore
+*.DS_Store
+Thumbs.db
