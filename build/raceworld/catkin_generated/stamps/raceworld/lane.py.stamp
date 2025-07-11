@@ -8,7 +8,8 @@ import cv2
 import numpy as np
 import math
 
-pub = rospy.Publisher("/car1/ackermann_cmd_mux/output", AckermannDriveStamped,queue_size=1)
+# 修改后的代码
+pub = rospy.Publisher("/car1/lane_vel_suggestion", AckermannDriveStamped, queue_size=1)
 isLeft = None
 
 #偏离太多，降速调整方向

@@ -26,13 +26,13 @@
 	<node name="spawn_pit1" pkg="gazebo_ros" type="spawn_model"
       args="-file $(find raceworld)/models/pit.sdf -sdf 
              -model pit_1 
-             -x -0.378 -y -1.131 -z 0.02" />
+             -x -0.378 -y -1.131 -z 0.012" />
 
     <!-- 生成第二个坑洞 -->
 	<node name="spawn_pit2" pkg="gazebo_ros" type="spawn_model"
       args="-file $(find raceworld)/models/pit.sdf -sdf 
              -model pit_2 
-             -x 2.791 -y -0.967 -z 0.02" />
+             -x 2.791 -y -0.967 -z 0.012" />
 
     <!-- 在 gazebo 中显示机器人模型 -->
     <node pkg="gazebo_ros" type="spawn_model" name="raceworld" args="-urdf -model raceworld 
@@ -41,8 +41,18 @@
     <group ns="car1">
     
     
-    	 <!-- xunxianjiaoben -->
-    <node pkg="raceworld" type="lane.py" name="lane_keeper" output="screen" />
+     
+    <!-- 1. 启动巡线节点 (lane.py) -->
+    <!-- 它现在是一个“领航员”，发布巡线建议 -->
+    <node pkg="raceworld" type="lane.py" name="lane_navigator" output="screen" />
+    
+    <!-- 2. 启动标签检测节点 (tag_detect.py) -->
+    <!-- 它是一个“观察员”，发布坑洞警报 -->
+    <node pkg="raceworld" type="tag_detect.py" name="tag_detector" output="screen" />
+    
+    <!-- 3. 启动主控制器节点 (car1_main_controller.py) -->
+    <!-- 这是“驾驶员”，根据领航员和观察员的信息做出最终决定 -->
+    <node pkg="raceworld" type="car1_main_controller.py" name="main_controller" output="screen" />
     
     
     <param name="robot_description" command="$(find xacro)/xacro '$(find raceworld)/urdf/car.xacro' bodyframe:=car1 ns:=car1"/> 
@@ -53,7 +63,7 @@
 	</node>
 	 
     	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-    args="-urdf -model car1 -param robot_description -x -1.274 -y -1.206 -z 0.00 -R 0.0014 -P -0.02155 -Y -0.5054"/>   
+    args="-urdf -model car1 -param robot_description -x -2.571 -y -0.984 -z 0.01 -R 0.0014 -P -0.02155 -Y -0.5054"/>   
     	 <!-- 从yaml文件加载联合控制器的参数 -->
 	<rosparam file="$(find raceworld)/config/ctrl.yaml" command="load"/>
 	
@@ -85,7 +95,7 @@
          
         <!-- 3. 修改 Gazebo 模型名和初始位置 -->
         <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-              args="-urdf -model car2 -param robot_description -x 0.6 -y -1.2282 -z 0.00"/>   
+              args="-urdf -model car2 -param robot_description -x 0.6 -y -1.2282 -z 0.01"/>   
         
         <!-- 从yaml文件加载联合控制器的参数 -->
         <rosparam file="$(find raceworld)/config/ctrl.yaml" command="load"/>
@@ -117,7 +127,7 @@
          
         <!-- 3. 修改 Gazebo 模型名和初始位置 -->
         <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-              args="-urdf -model car3 -param robot_description -x 1.5434 -y -1.22244 -z 0.00"/>   
+              args="-urdf -model car3 -param robot_description -x 1.5434 -y -1.22244 -z 0.01"/>   
         
         <!-- 从yaml文件加载联合控制器的参数 -->
         <rosparam file="$(find raceworld)/config/ctrl.yaml" command="load"/>

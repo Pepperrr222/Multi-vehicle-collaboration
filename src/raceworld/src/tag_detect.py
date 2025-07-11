@@ -5,6 +5,7 @@ import pyapriltags
 
 #1. 导入标准消息类型 Bool
 from std_msgs.msg import Bool
+detection_msg = False
 #2. 在全局创建一个发布者变量
 # 我们将在主函数中初始化它
 pit_detected_pub = None
