@@ -3,17 +3,7 @@ import rospy, cv2, cv_bridge
 from sensor_msgs.msg import Image
 import pyapriltags
 
-#1. 导入标准消息类型 Bool
-from std_msgs.msg import Bool
-detection_msg = False
-#2. 在全局创建一个发布者变量
-# 我们将在主函数中初始化它
-pit_detected_pub = None
-
-
 def image_callback(msg):
-    global pit_detected_pub
-
     detector = pyapriltags.Detector()
     bridge = cv_bridge.CvBridge()
     frame = bridge.imgmsg_to_cv2(msg, 'bgr8')
@@ -33,20 +23,11 @@ def image_callback(msg):
     cv2.namedWindow("camera",0)
     cv2.imshow('camera', frame)
     cv2.waitKey(1)
-    
-    #4. 只要发布者存在，就发布消息
-    # 无论是否检测到，都会发布一个布尔值 (True 或 False)
-    if pit_detected_pub is not None:
-        pit_detected_pub.publish(detection_msg)
 
 def get_camera():
     rospy.Subscriber("/car1/camera/zed_left/image_rect_color_left", Image, image_callback)
 
 if __name__ == '__main__':
-    rospy.init_node("tag_detector")
-    
-    # 在启动订阅者之前，初始化全局发布者
-    # 发布到 /car1/pit_detected 话题
-    pit_detected_pub = rospy.Publisher('/car1/pit_detected', Bool, queue_size=1)
+    rospy.init_node("get_camera")
     get_camera()
     rospy.spin()

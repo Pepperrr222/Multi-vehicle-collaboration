@@ -26,13 +26,13 @@
 	<node name="spawn_pit1" pkg="gazebo_ros" type="spawn_model"
       args="-file $(find raceworld)/models/pit.sdf -sdf 
              -model pit_1 
-             -x -0.378 -y -1.131 -z 0.012" />
+             -x -0.378 -y -1.047 -z 0.012" />
 
     <!-- 生成第二个坑洞 -->
 	<node name="spawn_pit2" pkg="gazebo_ros" type="spawn_model"
       args="-file $(find raceworld)/models/pit.sdf -sdf 
              -model pit_2 
-             -x 2.791 -y -0.967 -z 0.012" />
+             -x 2.791 -y -0.891 -z 0.012" />
 
     <!-- 在 gazebo 中显示机器人模型 -->
     <node pkg="gazebo_ros" type="spawn_model" name="raceworld" args="-urdf -model raceworld 

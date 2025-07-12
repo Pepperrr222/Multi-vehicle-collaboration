@@ -46,7 +46,7 @@
 		<self_collide>0</self_collide>
 		<kinematic>0</kinematic>
 	</link>
-	<pose frame=''>-0.378 -1.131 0.015 0 0 0 </pose>
+	<pose frame=''>-0.378 -1.047 0.015 0 0 0 </pose>
     </model>
 
     <model name='tagcode2'>
@@ -70,7 +70,7 @@
 		<self_collide>0</self_collide>
 		<kinematic>0</kinematic>
 	</link>
-	<pose frame=''>2.791 -0.967 0.015 0 0 0.7 </pose>
+	<pose frame=''>2.791 -0.891 0.015 0 0 0.7 </pose>
     </model>
 
 
